@@ -12,4 +12,4 @@ const PointSchema = new Schema({
     }
 });
 
-modules.exports = PointSchema;
+module.exports = PointSchema;
