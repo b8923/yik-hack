@@ -1,4 +1,5 @@
 const { Schema, model } = require("mongoose");
+const PointSchema = require("./Schemas/PointSchema");
 
 const PostSchema = new Schema(
   {
@@ -6,13 +7,12 @@ const PostSchema = new Schema(
       type: String,
       required: true
     },
-    latitude: {
-      type: Number,
-      required: true
-    },
-    longitude: {
-      type: Number,
-      required: true
+    location: {
+      type: PointSchema,
+      required: true,
+      index: {
+        type: "2dsphere"
+      }
     },
     userAvatar: String,
     author: {
