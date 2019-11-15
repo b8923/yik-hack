@@ -39,9 +39,9 @@
         <button
           type="submit"
           class="AuthForm-submit"
-          :class="{ 'is-submitting': loading }"
+          :class="{ 'is-submitting': isLoading }"
         >
-          <span v-if="!loading">{{ isSignup ? "Sign up" : "Go" }}</span>
+          <span v-if="!isLoading">{{ isSignup ? "Sign up" : "Go" }}</span>
           <span v-else>...</span>
         </button>
       </footer>
@@ -50,12 +50,14 @@
 </template>
 
 <script>
+import loading from "@/mixins/loading";
 export default {
   name: "Auth",
 
+  mixins: [loading],
+
   data() {
     return {
-      loading: false,
       username: "",
       password: "",
       passwordConfirmation: ""
@@ -70,9 +72,9 @@ export default {
 
   methods: {
     submit() {
-      this.loading = true;
+      this.formControl.start();
       setTimeout(() => {
-        this.loading = false;
+        this.formControl.done();
         this.$router.push({ name: "main" });
       }, 1000);
     }
