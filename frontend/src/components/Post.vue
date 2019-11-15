@@ -5,15 +5,20 @@
       <p class="Post-time">{{ time }}</p>
       <a href="#" class="Post-repliesLink">{{ comments.length }} Replies</a>
     </div>
-    <div>
+    <karma>
       {{ karma }}
-    </div>
+    </karma>
   </article>
 </template>
 
 <script>
+import Karma from "@/components/Karma";
 export default {
   name: "Post",
+
+  components: {
+    Karma
+  },
 
   props: {
     text: {
@@ -80,9 +85,13 @@ export default {
 }
 
 .Post-repliesLink {
+  bottom: 10px;
   color: var(--Muted-color);
   display: block;
+  margin: 0 auto;
+  position: absolute;
   text-align: center;
   text-decoration: none;
+  width: 80%;
 }
 </style>
