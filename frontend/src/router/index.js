@@ -12,15 +12,26 @@ function requiresAuth(to, from, next) {
   else next();
 }
 
+function checkLogin(to, from, next) {
+  console.log(store.state.user)
+  if (store.state.user && ["login", "signup"].includes(to.name)) {
+    next({ name: "main" });
+  } else {
+    next();
+  }
+}
+
 const routes = [
   {
     name: "signup",
     path: "/signup",
+    beforeEnter: checkLogin,
     component: Auth
   },
   {
     name: "login",
     path: "/login",
+    beforeEnter: checkLogin,
     component: Auth
   },
   {

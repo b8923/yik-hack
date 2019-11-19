@@ -70,6 +70,12 @@ export default {
     }
   },
 
+  created() {
+    if (this.$store.state.user) {
+      this.$router.push({ name: "main" });
+    }
+  },
+
   methods: {
     async submit() {
       this.formControl.start();

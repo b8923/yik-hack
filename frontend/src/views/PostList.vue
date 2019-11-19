@@ -1,6 +1,6 @@
 <template>
   <section class="PostList">
-    <post v-for="post in posts" :key="post._id" v-bind="post" />
+    <post v-for="post in posts" :key="post.id" v-bind="post" />
   </section>
 </template>
 

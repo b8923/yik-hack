@@ -21,6 +21,10 @@ export default {
     "app-header": Header
   },
 
+  async beforeCreate() {
+    await this.$store.dispatch("loadLocalState");
+  },
+
   mounted() {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(async position => {

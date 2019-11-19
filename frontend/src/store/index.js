@@ -45,24 +45,26 @@ export default new Vuex.Store({
       });
     },
 
-    signup({ commit }, form) {
+    signup({ commit, dispatch }, form) {
       return new Promise(resolve => {
         api
           .post("/auth/signup", form)
           .then(({ data }) => {
             commit("STORE_USER", data);
+            dispatch("syncLocalState");
             resolve(data);
           })
           .catch(err => console.log(err));
       });
     },
 
-    login({ commit }, form) {
+    login({ commit, dispatch }, form) {
       return new Promise(resolve => {
         api
           .post("/auth/login", form)
           .then(({ data }) => {
             commit("STORE_USER", data);
+            dispatch("syncLocalState");
             resolve(data);
           })
           .catch(err => console.log(err));
@@ -86,6 +88,21 @@ export default new Vuex.Store({
           })
           .catch(err => console.log(err));
       });
+    },
+
+    loadLocalState({ commit }) {
+      return new Promise(resolve => {
+        const localState = localStorage.getItem("yhstate");
+        if (localState) {
+          const state = JSON.parse(localState);
+          commit("STORE_USER", state.user);
+        }
+        resolve();
+      });
+    },
+
+    syncLocalState({ state }) {
+      localStorage.setItem("yhstate", JSON.stringify(state));
     },
 
     upvote({ commit }, postId) {
