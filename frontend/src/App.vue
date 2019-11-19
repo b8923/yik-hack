@@ -21,12 +21,6 @@ export default {
     "app-header": Header
   },
 
-  computed: {
-    loading() {
-      return false;
-    }
-  },
-
   mounted() {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(async position => {

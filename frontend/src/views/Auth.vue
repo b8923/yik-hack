@@ -71,12 +71,23 @@ export default {
   },
 
   methods: {
-    submit() {
+    async submit() {
       this.formControl.start();
-      setTimeout(() => {
+      if (this.isSignup) {
+        await this.$store.dispatch("signup", {
+          username: this.username,
+          password: this.password,
+          passwordConfirmation: this.passwordConfirmation
+        });
+      } else {
+        await this.$store.dispatch("login", {
+          username: this.username,
+          password: this.password
+        });
+
         this.formControl.done();
-        this.$router.push({ name: "main" });
-      }, 1000);
+      }
+      this.$router.push({ name: "main" });
     }
   }
 };

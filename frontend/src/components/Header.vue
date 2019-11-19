@@ -1,5 +1,5 @@
 <template>
-  <header class="AppHeader">
+  <header v-if="$store.state.user" class="AppHeader">
     <slot name="karma-points">
       540
     </slot>
