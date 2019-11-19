@@ -2,6 +2,7 @@ const express = require('express');
 const routes = express.Router();
 
 const AuthController = require("./controllers/Auth");
+const PostController = require("./controllers/Post");
 
 routes.post("/auth/signup", AuthController.signup);
 routes.post("/auth/login", AuthController.login);
@@ -9,9 +10,10 @@ routes.post("/auth/login", AuthController.login);
 
 /* Guarded routes */
 
-// see all posts in range
-// create post (with limit of characters)
-// delete post
+routes.get("/posts", PostController.index);
+routes.post("/posts", PostController.store);
+routes.delete("/posts/:id", PostController.destroy);
+
 // upvote/downvote post
 // see posts comments
 // create a comment

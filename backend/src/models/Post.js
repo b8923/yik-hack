@@ -44,4 +44,12 @@ const PostSchema = new Schema(
   }
 );
 
+PostSchema.virtual("id").get(function() {
+  return this._id
+});
+
+PostSchema.set('toJSON', {
+  virtuals: true
+});
+
 module.exports = model("Post", PostSchema);
