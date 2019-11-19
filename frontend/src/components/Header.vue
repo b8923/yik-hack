@@ -7,7 +7,7 @@
       <a href="#" class="AppNav-link active">Hot</a>
       <a href="#" class="AppNav-link">New</a>
     </nav>
-    <new-post-button></new-post-button>
+    <new-post-button />
   </header>
 </template>
 
@@ -34,21 +34,21 @@ export default {
 }
 
 .AppNav {
+  border-radius: 5px;
+  border: 2px solid var(--Secondary-color);
+  color: var(--Secondary-color);
   display: flex;
   justify-content: space-between;
-  border: 2px solid var(--Secondary-color);
-  border-radius: 5px;
-  color: var(--Secondary-color)
 }
 
 .AppNav .AppNav-link:visited {
-  color: var(--Secondary-color)
+  color: var(--Secondary-color);
 }
 
 .AppNav .AppNav-link:active,
 .AppNav .AppNav-link.active {
-  color: var(--Primary-color);
   background-color: var(--Secondary-color);
+  color: var(--Primary-color);
 }
 
 .AppNav .AppNav-link {
