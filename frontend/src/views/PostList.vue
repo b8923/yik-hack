@@ -17,6 +17,10 @@ export default {
     posts() {
       return this.$store.state.posts;
     }
+  },
+
+  mounted() {
+    this.$store.dispatch("loadPosts");
   }
 };
 </script>

@@ -25,7 +25,6 @@ export default {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(async position => {
         await this.$store.dispatch("storeLocation", position.coords);
-        this.$store.dispatch("loadPosts");
       });
     } else {
       // eslint-disable-next-line

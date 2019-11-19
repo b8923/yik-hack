@@ -12,8 +12,10 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   config => {
-    config.headers["longitude"] = store.state.position.longitude;
-    config.headers["latitude"] = store.state.position.latitude;
+    const { position, user } = store.state;
+    config.headers.longitude = position.longitude;
+    config.headers.latitude = position.latitude;
+    config.headers.user = user ? user.id : null;
     return config;
   },
   error => Promise.reject(error)
