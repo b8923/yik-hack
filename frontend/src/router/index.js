@@ -1,8 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Auth from "@/components/Auth";
-import PostList from "@/components/PostList";
-import NewPost from "@/components/NewPost";
+import Auth from "@/views/Auth";
+import PostList from "@/views/PostList";
+import NewPost from "@/views/NewPost";
 
 Vue.use(VueRouter);
 
