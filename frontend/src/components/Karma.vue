@@ -47,11 +47,11 @@ export default {
 
   methods: {
     upvote() {
-      return;
+      this.$store.dispatch("upvote", this.postId);
     },
 
     downvote() {
-      return;
+      this.$store.dispatch("downvote", this.postId);
     }
   }
 };
@@ -82,9 +82,9 @@ export default {
 }
 
 .Karma-upvote:active,
-.Karma-upvote.active,
+.Karma-upvote.is-active,
 .Karma-downvote:active,
-.Karma-downvote.active {
+.Karma-downvote.is-active {
   fill: var(--Primary-color);
 }
 </style>
