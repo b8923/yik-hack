@@ -7,7 +7,7 @@ module.exports = {
             req.headers.latitude
         ]
         const posts = await Post.find()
-            .select("-__v -_id")
+            .select("-__v")
             .where('location')
             .near({
                 center: location,
