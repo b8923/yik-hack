@@ -38,6 +38,13 @@
 export default {
   name: "Karma",
 
+  props: {
+    postId: {
+      type: [String, Number],
+      required: true
+    }
+  },
+
   methods: {
     upvote() {
       return;

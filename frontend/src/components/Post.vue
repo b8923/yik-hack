@@ -5,7 +5,7 @@
       <p class="Post-time">{{ time }}</p>
       <a href="#" class="Post-repliesLink">{{ comments.length }} Replies</a>
     </div>
-    <karma>
+    <karma :post-id="id">
       {{ karma }}
     </karma>
   </article>
@@ -21,6 +21,10 @@ export default {
   },
 
   props: {
+    id: {
+      type: [String, Number],
+      required: true
+    },
     text: {
       type: String,
       required: true
