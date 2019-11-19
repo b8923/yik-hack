@@ -27,7 +27,17 @@ export default {
     }
   },
 
-  mounted() {}
+  mounted() {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(async position => {
+        await this.$store.dispatch("storeLocation", position.coords);
+        this.$store.dispatch("loadPosts");
+      });
+    } else {
+      // eslint-disable-next-line
+      alert("I'm sorry, but geolocation services are not supported by your browser.");
+    }
+  }
 };
 </script>
 
