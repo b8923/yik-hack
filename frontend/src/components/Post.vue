@@ -2,7 +2,7 @@
   <article class="Post">
     <div>
       <p class="Post-text">{{ text }}</p>
-      <p class="Post-time">{{ time }}</p>
+      <p class="Post-time">{{ createdAt | humanDiff }}</p>
       <a href="#" class="Post-repliesLink">{{ comments.length }} Replies</a>
     </div>
     <karma v-bind="{ id, upvotes, downvotes }">
@@ -13,8 +13,31 @@
 
 <script>
 import Karma from "@/components/Karma";
+import {
+  differenceInMinutes,
+  differenceInHours,
+  differenceInDays
+} from "date-fns";
 export default {
   name: "Post",
+
+  filters: {
+    humanDiff(value) {
+      const postDate = new Date(value);
+      const currentDate = new Date();
+      const diffMinutes = differenceInMinutes(currentDate, postDate);
+
+      if (diffMinutes < 60) {
+        return `${diffMinutes} min`;
+      } else if (diffMinutes < 60 * 24) {
+        const diffHours = differenceInHours(currentDate, postDate);
+        return `${diffHours} hrs`;
+      } else {
+        const diffDays = differenceInDays(currentDate, postDate);
+        return `${diffDays} days`;
+      }
+    }
+  },
 
   components: {
     Karma
@@ -30,7 +53,7 @@ export default {
       required: true
     },
 
-    time: {
+    createdAt: {
       type: String,
       default: "0"
     },
