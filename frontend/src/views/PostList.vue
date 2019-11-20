@@ -16,11 +16,25 @@ export default {
   computed: {
     posts() {
       return this.$store.state.posts;
+    },
+
+    position() {
+      return this.$store.state.position;
     }
   },
 
-  mounted() {
-    this.$store.dispatch("loadPosts");
+  watch: {
+    "position.latitude": function() {
+      this.loadPosts();
+    }
+  },
+
+  methods: {
+    loadPosts() {
+      if (this.position.latitude) {
+        this.$store.dispatch("loadPosts");
+      }
+    }
   }
 };
 </script>

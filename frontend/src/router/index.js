@@ -13,7 +13,6 @@ function requiresAuth(to, from, next) {
 }
 
 function checkLogin(to, from, next) {
-  console.log(store.state.user)
   if (store.state.user && ["login", "signup"].includes(to.name)) {
     next({ name: "main" });
   } else {
