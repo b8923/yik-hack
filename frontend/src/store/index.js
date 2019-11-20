@@ -27,14 +27,16 @@ export default new Vuex.Store({
       state.posts = posts;
     },
 
-    UPVOTE_POST: (state, postId) => {
-      const post = state.posts.find(post => post.id === postId);
-      console.log(post);
+    UPVOTE_POST: (state, post) => {
+      state.posts = state.posts.map(localPost =>
+        localPost.id !== post.id ? localPost : post
+      );
     },
 
-    DOWNVOTE_POST: (state, postId) => {
-      const post = state.posts.find(post => post.id === postId);
-      console.log(post);
+    DOWNVOTE_POST: (state, post) => {
+      state.posts = state.posts.map(localPost =>
+        localPost.id !== post.id ? localPost : post
+      );
     }
   },
   actions: {
@@ -106,13 +108,17 @@ export default new Vuex.Store({
     },
 
     upvote({ commit }, postId) {
-      // API call
-      commit("UPVOTE_POST", postId);
+      api
+        .post(`/posts/${postId}/upvote`)
+        .then(({ data: post }) => commit("UPVOTE_POST", post))
+        .catch(err => console.log(err));
     },
 
     downvote({ commit }, postId) {
-      // API call
-      commit("DOWNVOTE_POST", postId);
+      api
+        .post(`/posts/${postId}/downvote`)
+        .then(({ data: post }) => commit("DOWNVOTE_POST", post))
+        .catch(err => console.log(err));
     }
   }
 });

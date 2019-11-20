@@ -1,6 +1,10 @@
 <template>
   <aside class="Karma">
-    <button type="button" class="Karma-upvote" @click.prevent="upvote">
+    <button
+      type="button"
+      :class="['Karma-upvote', { 'is-active': hasUpvoted }]"
+      @click.prevent="upvote"
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
@@ -18,7 +22,11 @@
       <slot />
     </p>
 
-    <button type="button" class="Karma-downvote" @click.prevent="downvote">
+    <button
+      type="button"
+      :class="['Karma-downvote', { 'is-active': hasDownvoted }]"
+      @click.prevent="downvote"
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
@@ -39,19 +47,43 @@ export default {
   name: "Karma",
 
   props: {
-    postId: {
+    id: {
       type: [String, Number],
       required: true
+    },
+
+    upvotes: {
+      type: Array,
+      required: true
+    },
+
+    downvotes: {
+      type: Array,
+      required: true
+    }
+  },
+
+  computed: {
+    userId() {
+      return this.$store.state.user.id;
+    },
+
+    hasUpvoted() {
+      return this.upvotes.includes(this.userId);
+    },
+
+    hasDownvoted() {
+      return this.downvotes.includes(this.userId);
     }
   },
 
   methods: {
     upvote() {
-      this.$store.dispatch("upvote", this.postId);
+      this.$store.dispatch("upvote", this.id);
     },
 
     downvote() {
-      this.$store.dispatch("downvote", this.postId);
+      this.$store.dispatch("downvote", this.id);
     }
   }
 };

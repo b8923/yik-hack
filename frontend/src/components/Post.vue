@@ -5,7 +5,7 @@
       <p class="Post-time">{{ time }}</p>
       <a href="#" class="Post-repliesLink">{{ comments.length }} Replies</a>
     </div>
-    <karma :post-id="id">
+    <karma v-bind="{ id, upvotes, downvotes }">
       {{ karma }}
     </karma>
   </article>
