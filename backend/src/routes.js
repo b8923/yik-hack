@@ -3,6 +3,7 @@ const routes = express.Router();
 
 const AuthController = require("./controllers/Auth");
 const PostController = require("./controllers/Post");
+const UserPostController = require("./controllers/UserPost");
 const PostUpvoteController = require("./controllers/PostUpvote");
 const PostDownvoteController = require("./controllers/PostDownvote");
 
@@ -14,6 +15,7 @@ routes.post("/auth/login", AuthController.login);
 routes.get("/posts", PostController.index);
 routes.post("/posts", PostController.store);
 routes.delete("/posts/:id", PostController.destroy);
+routes.get("/user-posts", UserPostController.index);
 
 routes.post("/posts/:id/upvote", PostUpvoteController.store);
 routes.post("/posts/:id/downvote", PostDownvoteController.store);
