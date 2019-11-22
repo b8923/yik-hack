@@ -29,10 +29,15 @@ export default {
     }
   },
 
+  mounted() {
+    this.loadPosts();
+  },
+
   methods: {
     loadPosts() {
       if (this.position.latitude) {
         this.$store.dispatch("loadPosts");
+        this.$store.dispatch("loadUserPosts");
       }
     }
   }

@@ -1,7 +1,7 @@
 <template>
   <header v-if="$store.state.user" class="AppHeader">
     <slot name="karma-points">
-      540
+      {{ karma }}
     </slot>
     <nav class="AppNav">
       <a href="#" class="AppNav-link active">Hot</a>
@@ -19,6 +19,12 @@ export default {
 
   components: {
     NewPostButton
+  },
+
+  computed: {
+    karma() {
+      return this.$store.getters.karma;
+    }
   }
 };
 </script>

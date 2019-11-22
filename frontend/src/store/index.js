@@ -12,7 +12,17 @@ export default new Vuex.Store({
       latitude: null,
       longitude: null
     },
-    posts: []
+    posts: [],
+    userPosts: []
+  },
+  getters: {
+    karma: ({ userPosts }) => {
+      return userPosts.reduce((sum, post) => {
+        sum += post.upvotes.length - post.downvotes.length;
+        console.log([post.upvotes, post.downvotes]);
+        return sum;
+      }, 0.0);
+    }
   },
   mutations: {
     STORE_POSITION: (state, position) => {
@@ -37,6 +47,10 @@ export default new Vuex.Store({
       state.posts = state.posts.map(localPost =>
         localPost.id !== post.id ? localPost : post
       );
+    },
+
+    STORE_USER_POSTS: (state, posts) => {
+      state.userPosts = posts;
     }
   },
   actions: {
@@ -80,12 +94,20 @@ export default new Vuex.Store({
         .catch(err => console.log(err));
     },
 
+    loadUserPosts({ commit }) {
+      api
+        .get("/user-posts")
+        .then(({ data }) => commit("STORE_USER_POSTS", data))
+        .catch(err => console.log(err));
+    },
+
     storePost({ dispatch }, text) {
       return new Promise(resolve => {
         api
           .post("/posts", { text })
           .then(() => {
             dispatch("loadPosts");
+            dispatch("loadUserPosts");
             resolve();
           })
           .catch(err => console.log(err));
